@@ -93,12 +93,10 @@ export default function Header() {
           <a className="brand" href="#home">
             <img
               className="brand-logo"
-              src={process.env.PUBLIC_URL + '/assets/rise-financial-services-logo.png'}
-              alt="Rise Financial Services"
+              src="/assets/rise-financial-services-logo.png"
+              alt="Rise Financial Services Logo"
               decoding="async"
               loading="eager"
-              width="240"
-              height="72"
             />
           </a>
 
