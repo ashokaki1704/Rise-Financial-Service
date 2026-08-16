@@ -91,7 +91,8 @@ export default function Header() {
       <header className="site-header">
         <nav className="nav wrap">
           <a className="brand" href="#home">
-            <img src="/assets/rise-financial-services-logo.png" alt="Rise Financial Services" />
+            {/* Updated logo file name — replace the file in /assets with this filename to use the new larger logo */}
+            <img className="brand-logo" src="/assets/rise-financial-services-logo-large.png" alt="Rise Financial Services" />
           </a>
 
           <div

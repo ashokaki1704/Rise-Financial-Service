@@ -1,6 +1,7 @@
 /* Header + Topbar responsive styles with safe-area and ellipsis handling
    Option B revised: show topbar on mobile, but hide it on scroll down and show on scroll up.
    Topbar is kept out of the mobile menu and moves with scrolling for better visibility.
+   Added logo sizing and improved font settings so the new logo is larger and email is visible.
 */
 :root{
   --topbar-bg: #07213a;
@@ -9,6 +10,12 @@
   --line: rgba(0,0,0,0.06);
   --topbar-height: 48px; /* default */
   --nav-height: 64px;
+  --header-font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+}
+
+/* apply a clean font across header/topbar (add Google Fonts link in index.html if you want Poppins) */
+.topbar, .site-header, .nav, .topbar * , .nav *{
+  font-family: var(--header-font);
 }
 
 /* make sure fixed elements don't get cut on notched phones */
@@ -23,7 +30,7 @@
   left: 0;
   right: 0;
   z-index: 2000;
-  font-size: 13px;
+  font-size: 14px; /* increased slightly for readability */
   height: var(--topbar-height);
   display: flex;
   align-items: center;
@@ -76,14 +83,18 @@ body.topbar-hidden{
   min-width:0;
 }
 
-/* ellipsis to prevent overflow */
+/* keep email visible: do not ellipsis the email; allow it to shrink and wrap if needed */
 .topbar .location,
-.topbar .hours,
-.topbar .contacts,
-.topbar .email{
+.topbar .hours{
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+.topbar .email{
+  white-space: normal; /* allow wrapping */
+  word-break: break-word;
+  font-weight: 600;
+  font-size: 13px;
 }
 
 .topbar .divider{ color: rgba(255,255,255,0.6); margin:0 8px; }
@@ -131,11 +142,26 @@ body.topbar-hidden .site-header{
   z-index: 2100;
 }
 
-/* Logo sizing */
-.nav .brand img{
-  height: 44px;
+/* Logo sizing: ensure the new logo is large and visible */
+.nav .brand .brand-logo{
+  height: 72px; /* larger desktop logo */
   width: auto;
   display: block;
+  object-fit: contain;
+}
+
+/* ensure logo doesn't push layout on small screens */
+@media (max-width: 900px){
+  .nav .brand .brand-logo{ height: 48px; }
+  :root{ --topbar-height: 48px; --nav-height: 56px; }
+  .topbar{ font-size: 13px; }
+}
+
+@media (max-width: 420px){
+  .nav .brand .brand-logo{ height: 42px; }
+  :root{ --topbar-height: 44px; --nav-height: 52px; }
+  .topbar .contacts .phone:nth-child(n+3){ display:none; }
+  .topbar .divider{ display: none; }
 }
 
 /* active mobile nav menu should account for fixed header heights */
@@ -150,39 +176,6 @@ body.topbar-hidden .site-header{
   align-items: center;
 }
 
-/* mobile adjustments: show topbar but allow hide-on-scroll */
-@media (max-width: 900px){
-  :root{
-    --topbar-height: 48px;
-    --nav-height: 56px;
-  }
-
-  .nav .brand img{ height: 36px; }
-
-  .topbar{ font-size: 12px; }
-}
-
-/* very small phones */
-@media (max-width: 420px){
-  :root{
-    --topbar-height: 44px;
-    --nav-height: 52px;
-  }
-
-  .nav .brand img{ height: 30px; }
-
-  /* show only first phone number to avoid overflow */
-  .topbar .contacts .phone:nth-child(n+3){ display:none; }
-
-  .topbar .divider{ display: none; }
-}
-
-/* ensure navlinks (mobile menu) has high z-index and full width */
-.navlinks{
-  z-index: 2050;
-}
-
-/* small visual tweaks for the buttons */
 .btn.btn-gold{
   background: #c79a2a;
   color: #fff;
@@ -214,13 +207,16 @@ body.topbar-hidden .site-header{
   z-index: 2040;
 }
 
-/* when open, overlay becomes visible and captures clicks */
 .nav-overlay.open {
   opacity: 1;
   pointer-events: auto;
 }
 
-/* ensure mobile navlinks (when fixed) look slightly separated from headers */
+/* ensure navlinks (mobile menu) has high z-index and full width */
+.navlinks{
+  z-index: 2050;
+}
+
 .navlinks a {
   display: block;
   padding: 8px 0;
