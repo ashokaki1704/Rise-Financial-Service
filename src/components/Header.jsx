@@ -1,6 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
 import './Header.css';
-import logo from '../assets/rise-logo.svg';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -92,7 +91,15 @@ export default function Header() {
       <header className="site-header">
         <nav className="nav wrap">
           <a className="brand" href="#home">
-            <img className="brand-logo" src={logo} alt="Rise Financial Services" />
+            <img
+              className="brand-logo"
+              src={process.env.PUBLIC_URL + '/assets/rise-logo.svg'}
+              alt="Rise Financial Services"
+              decoding="async"
+              loading="eager"
+              width="240"
+              height="72"
+            />
           </a>
 
           <div
