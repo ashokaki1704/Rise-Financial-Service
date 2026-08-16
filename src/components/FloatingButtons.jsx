@@ -10,8 +10,8 @@ export default function FloatingButtons() {
       </a>
 
       <a className="whatsapp-fab" href="https://wa.me/918688242655" aria-label="WhatsApp us" target="_blank" rel="noopener noreferrer">
-        <svg viewBox="0 0 32 32" aria-hidden="true">
-          <path d="M16.02 2.667c-7.36 0-13.35 5.99-13.35 13.35 0 2.355.62 4.657 1.795 6.68L2.667 29.33l6.79-1.78a13.29 13.29 0 0 0 6.56 1.72h.006c7.36 0 13.35-5.99 13.35-13.35 0-3.567-1.39-6.92-3.[...]"/>
+        <svg viewBox="0 0 24 24" aria-hidden="true">
+          <path fill="currentColor" d="M17.507 14.307l-2.88-.514a1.5 1.5 0 0 0-1.528.706l-.693 1.053c-1.332-.738-2.85-2.256-3.588-3.588l1.052-.693a1.5 1.5 0 0 0 .707-1.528l-.514-2.88a1.5 1.5 0 0 0-1.473-1.177H6.5a1.5 1.5 0 0 0-1.492 1.635c.963 7.274 6.588 12.899 13.862 13.862a1.5 1.5 0 0 0 1.635-1.492v-1.531a1.5 1.5 0 0 0-1.177-1.473z"/>
         </svg>
       </a>
     </>
