@@ -67,12 +67,25 @@ export default function Header() {
             id="navlinks"
             style={mobileMenuStyle}
           >
+            {/* Mobile-only contact block (moved from topbar for small screens) */}
+            <div className="mobile-contacts" role="group" aria-label="Contact">
+              <a href="tel:+918688242655" onClick={closeMenu} className="phone">📞 +91 86882 42655</a>
+              <a href="tel:+917382120015" onClick={closeMenu} className="phone">📞 +91 73821 20015</a>
+              <a href="mailto:ashok.risefinance@gmail.com" onClick={closeMenu} className="email">✉️ ashok.risefinance@gmail.com</a>
+            </div>
+
             <a href="#home" onClick={closeMenu}>Home</a>
             <a href="#about" onClick={closeMenu}>Why Us</a>
             <a href="#services" onClick={closeMenu}>Services</a>
             <a href="#network" onClick={closeMenu}>Network</a>
             <a href="#process" onClick={closeMenu}>Process</a>
             <a href="#contact" onClick={closeMenu}>Contact</a>
+
+            {/* Optional: duplicate CTAs inside mobile menu for convenience */}
+            <div className="mobile-ctas">
+              <a className="btn btn-gold" href="#apply" onClick={closeMenu} role="button">Apply Now</a>
+              <a className="btn btn-outline" href="tel:+918688242655" onClick={closeMenu} role="button">Call Us</a>
+            </div>
           </div>
 
           <div className="nav-cta">

@@ -1,13 +1,12 @@
 /* Header + Topbar responsive styles with safe-area and ellipsis handling
-   Improved mobile layout: fixed topbar + header, body padding to avoid overlap,
-   hide less important items on small screens, ensure mobile menu sits below header.
+   Option B: hide topbar on small screens and move contacts into mobile menu for clearer hero area
 */
 :root{
   --topbar-bg: #07213a;
   --topbar-color: #ffffff;
   --paper: #ffffff;
   --line: rgba(0,0,0,0.06);
-  --topbar-height: 48px; /* mobile-friendly default */
+  --topbar-height: 48px; /* default */
   --nav-height: 64px;
 }
 
@@ -127,43 +126,39 @@ body{
   align-items: center;
 }
 
-/* mobile adjustments */
+/* mobile adjustments: Option B - hide topbar and move contacts into menu for clear hero */
 @media (max-width: 900px){
   :root{
-    --topbar-height: 44px;
+    --topbar-height: 0px; /* topbar hidden on mobile */
     --nav-height: 56px;
   }
 
-  .nav-cta{
-    /* collapse CTAs into a single apply button to save space */
-    display: flex;
-    gap: 8px;
-  }
+  /* hide the fixed topbar on mobile */
+  .topbar{ display: none; }
 
-  /* hide less important text on very small screens */
-  .topbar .hours,
-  .topbar .email{ display: none; }
+  /* reduce body padding to account only for nav height */
+  body{ padding-top: calc(var(--nav-height) + env(safe-area-inset-top)); }
 
-  .nav .brand img{
-    height: 36px;
-  }
+  .nav .brand img{ height: 36px; }
 
   .topbar{ font-size: 12px; }
+
+  /* show mobile-only contact block inside the menu */
+  .mobile-contacts{ display:flex; flex-direction:column; gap:8px; width:100%; }
+  .mobile-contacts a{ font-weight:700; color:#07213a; text-decoration:none; }
+
+  .mobile-ctas{ display:flex; gap:8px; margin-top:8px; width:100%; }
+  .mobile-ctas .btn{ flex:1; text-align:center; }
 }
 
 /* very small phones */
 @media (max-width: 420px){
   :root{
-    --topbar-height: 40px;
+    --topbar-height: 0px;
     --nav-height: 52px;
   }
 
   .nav .brand img{ height: 30px; }
-
-  /* show only first phone number to avoid overflow */
-  .topbar .contacts .phone:nth-child(n+3){ display:none; }
-
-  .topbar .divider{ display: none; }
 }
 
 /* ensure navlinks (mobile menu) has high z-index and full width */
