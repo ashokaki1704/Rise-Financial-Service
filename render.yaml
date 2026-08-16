@@ -1,0 +1,17 @@
+services:
+  - type: web
+    name: rise-financial-services
+    env: node
+    plan: free
+    buildCommand: npm run build
+    startCommand: npm start
+    envVars:
+      - key: SQLITE_PATH
+        value: data/applications.db
+    # NOTE: Render's free plan uses an EPHEMERAL filesystem -- the SQLite file
+    # (server/data/applications.db) is wiped on every deploy/restart. That's
+    # fine for testing, but for real customer data either:
+    #   1) upgrade to a paid plan and add a persistent disk mounted at
+    #      ./server/data, or
+    #   2) swap db.js for a managed Postgres/MySQL client (Render offers a
+    #      free/paid Postgres add-on).
