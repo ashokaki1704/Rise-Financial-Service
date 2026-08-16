@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Header.css';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
@@ -8,18 +9,26 @@ export default function Header() {
   return (
     <>
       <div className="topbar">
-        <div className="wrap">
-          <div>Vijayawada, Andhra Pradesh <span className="divider">|</span> Mon–Sat, 10 AM – 7 PM</div>
-          <div>
-            <a href="tel:+918688242655">+91 86882 42655</a>,{' '}
-            <a href="tel:+917382120015">+91 73821 20015</a>
+        <div className="wrap topbar-wrap">
+          <div className="topbar-left">
+            <div className="location">Vijayawada, Andhra Pradesh</div>
             <span className="divider">|</span>
-            <a href="mailto:ashok.risefinance@gmail.com">ashok.risefinance@gmail.com</a>
+            <div className="hours">Mon–Sat, 10 AM – 7 PM</div>
+          </div>
+
+          <div className="topbar-right">
+            <div className="contacts">
+              <a href="tel:+918688242655" className="phone">+91 86882 42655</a>
+              <span className="comma">,</span>
+              <a href="tel:+917382120015" className="phone">+91 73821 20015</a>
+              <span className="divider">|</span>
+              <a href="mailto:ashok.risefinance@gmail.com" className="email">ashok.risefinance@gmail.com</a>
+            </div>
           </div>
         </div>
       </div>
 
-      <header>
+      <header className="site-header">
         <nav className="nav wrap">
           <a className="brand" href="#home">
             <img src="/assets/rise-financial-services-logo.png" alt="Rise Financial Services" />
