@@ -1,10 +1,38 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import './Header.css';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
 
   const closeMenu = () => setOpen(false);
+
+  // Lock page scroll when mobile menu is open
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => {
+      document.body.style.overflow = '';
+    };
+  }, [open]);
+
+  // style used when the mobile menu is open
+  const mobileMenuStyle = open
+    ? {
+        display: 'flex',
+        position: 'fixed', // ensure it sits above page content and below headers
+        top: 'calc(var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top))',
+        left: 0,
+        right: 0,
+        background: 'var(--paper)',
+        flexDirection: 'column',
+        alignItems: 'flex-start',
+        padding: '18px 20px',
+        borderBottom: '1px solid var(--line)',
+        gap: '14px',
+        maxHeight: 'calc(100vh - (var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top)))',
+        overflowY: 'auto',
+        zIndex: 2050,
+      }
+    : undefined;
 
   return (
     <>
@@ -37,23 +65,7 @@ export default function Header() {
           <div
             className="navlinks"
             id="navlinks"
-            style={
-              open
-                ? {
-                    display: 'flex',
-                    position: 'absolute',
-                    top: '100%',
-                    left: 0,
-                    right: 0,
-                    background: 'var(--paper)',
-                    flexDirection: 'column',
-                    alignItems: 'flex-start',
-                    padding: '20px',
-                    borderBottom: '1px solid var(--line)',
-                    gap: '18px',
-                  }
-                : undefined
-            }
+            style={mobileMenuStyle}
           >
             <a href="#home" onClick={closeMenu}>Home</a>
             <a href="#about" onClick={closeMenu}>Why Us</a>
@@ -71,7 +83,7 @@ export default function Header() {
           <button
             className="hamburger"
             id="hamburger"
-            aria-label="Open menu"
+            aria-label={open ? 'Close menu' : 'Open menu'}
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
@@ -79,6 +91,13 @@ export default function Header() {
           </button>
         </nav>
       </header>
+
+      {/* overlay shown only when the mobile menu is open — closes menu when tapped */}
+      <div
+        className={`nav-overlay ${open ? 'open' : ''}`}
+        onClick={closeMenu}
+        aria-hidden={!open}
+      />
     </>
   );
 }
