@@ -1,9 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<svg width="1200" height="300" viewBox="0 0 1200 300" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-  <rect width="1200" height="300" fill="white"/>
+<svg width="1200" height="300" viewBox="0 0 1200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
   <!-- Stylized R mark with gold rising bars -->
   <g transform="translate(60,10)">
-    <path d="M170 20 C170 20 210 -10 260 10 C310 30 300 90 260 110 C220 130 180 120 170 140" fill="#0b3a66" opacity="1" />
+    <path d="M170 20 C170 20 210 -10 260 10 C310 30 300 90 260 110 C220 130 180 120 170 140" fill="#0b3a66" />
     <g transform="translate(-10,40)">
       <rect x="120" y="40" width="16" height="60" rx="2" fill="#c7972b" />
       <rect x="140" y="30" width="16" height="70" rx="2" fill="#c7972b" />

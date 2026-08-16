@@ -29,7 +29,7 @@
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2000;
+  z-index: 2400; /* keep topbar above everything */
   font-size: 14px; /* increased slightly for readability */
   height: var(--topbar-height);
   display: flex;
@@ -106,7 +106,7 @@ body.topbar-hidden{
   top: calc(var(--topbar-height) + env(safe-area-inset-top));
   left: 0;
   right: 0;
-  z-index: 1900;
+  z-index: 2200; /* make sure header is above overlay */
   background: rgba(255,255,255,0.98);
   height: var(--nav-height);
   display: flex;
@@ -139,10 +139,14 @@ body.topbar-hidden .site-header{
   gap: 4px;
   padding: 8px;
   cursor: pointer;
-  z-index: 2100;
+  z-index: 2250;
 }
 
 /* Logo sizing: ensure the new logo is large and visible */
+.nav .brand, .nav .brand .brand-logo{
+  position: relative;
+  z-index: 2300; /* keep brand above overlays */
+}
 .nav .brand .brand-logo{
   height: 72px; /* larger desktop logo */
   width: auto;
@@ -204,7 +208,7 @@ body.topbar-hidden .site-header{
   opacity: 0;
   pointer-events: none;
   transition: opacity 160ms ease-in-out;
-  z-index: 2040;
+  z-index: 2140; /* below header */
 }
 
 .nav-overlay.open {
@@ -214,7 +218,7 @@ body.topbar-hidden .site-header{
 
 /* ensure navlinks (mobile menu) has high z-index and full width */
 .navlinks{
-  z-index: 2050;
+  z-index: 2150;
 }
 
 .navlinks a {
