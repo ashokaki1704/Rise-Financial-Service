@@ -1,18 +1,50 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import './Header.css';
 
 export default function Header() {
   const [open, setOpen] = useState(false);
+  const [showTopbar, setShowTopbar] = useState(true);
+  const lastY = useRef(0);
 
   const closeMenu = () => setOpen(false);
 
   // Lock page scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
+    // when menu opens, ensure topbar is visible
+    if (open) {
+      setShowTopbar(true);
+      document.body.classList.remove('topbar-hidden');
+    }
     return () => {
       document.body.style.overflow = '';
     };
   }, [open]);
+
+  // show/hide topbar on scroll: hide when scrolling down, show when scrolling up
+  useEffect(() => {
+    const onScroll = () => {
+      const currentY = window.scrollY || window.pageYOffset;
+      if (currentY > lastY.current && currentY > 80) {
+        // scrolling down
+        if (showTopbar) {
+          setShowTopbar(false);
+          document.body.classList.add('topbar-hidden');
+        }
+      } else {
+        // scrolling up
+        if (!showTopbar) {
+          setShowTopbar(true);
+          document.body.classList.remove('topbar-hidden');
+        }
+      }
+      lastY.current = currentY;
+    };
+
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [showTopbar]);
 
   // style used when the mobile menu is open
   const mobileMenuStyle = open
@@ -36,7 +68,7 @@ export default function Header() {
 
   return (
     <>
-      <div className="topbar">
+      <div className={`topbar ${showTopbar ? 'visible' : 'hidden'}`}>
         <div className="wrap topbar-wrap">
           <div className="topbar-left">
             <div className="location">Vijayawada, Andhra Pradesh</div>
@@ -67,25 +99,12 @@ export default function Header() {
             id="navlinks"
             style={mobileMenuStyle}
           >
-            {/* Mobile-only contact block (moved from topbar for small screens) */}
-            <div className="mobile-contacts" role="group" aria-label="Contact">
-              <a href="tel:+918688242655" onClick={closeMenu} className="phone">📞 +91 86882 42655</a>
-              <a href="tel:+917382120015" onClick={closeMenu} className="phone">📞 +91 73821 20015</a>
-              <a href="mailto:ashok.risefinance@gmail.com" onClick={closeMenu} className="email">✉️ ashok.risefinance@gmail.com</a>
-            </div>
-
             <a href="#home" onClick={closeMenu}>Home</a>
             <a href="#about" onClick={closeMenu}>Why Us</a>
             <a href="#services" onClick={closeMenu}>Services</a>
             <a href="#network" onClick={closeMenu}>Network</a>
             <a href="#process" onClick={closeMenu}>Process</a>
             <a href="#contact" onClick={closeMenu}>Contact</a>
-
-            {/* Optional: duplicate CTAs inside mobile menu for convenience */}
-            <div className="mobile-ctas">
-              <a className="btn btn-gold" href="#apply" onClick={closeMenu} role="button">Apply Now</a>
-              <a className="btn btn-outline" href="tel:+918688242655" onClick={closeMenu} role="button">Call Us</a>
-            </div>
           </div>
 
           <div className="nav-cta">
