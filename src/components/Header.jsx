@@ -76,7 +76,7 @@ export default function Header() {
            
           </div>
 
-          <div className="topbar-right">
+          <div className="topbar">
             <div className="contacts">
               <a href="tel:+918688242655" className="phone">+91 86882 42655</a>
               <span className="comma">,</span>
