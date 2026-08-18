@@ -1,234 +1,738 @@
-/* Header + Topbar responsive styles with safe-area and ellipsis handling
-   Option B revised: show topbar on mobile, but hide it on scroll down and show on scroll up.
-   Topbar is kept out of the mobile menu and moves with scrolling for better visibility.
-   Added logo sizing and improved font settings so the new logo is larger and email is visible.
-*/
-:root{
+/* =========================================================
+   RISE FINANCIAL SERVICES
+   MOBILE HEADER + TOPBAR — COMPACT SINGLE LINE
+   ========================================================= */
+
+:root {
   --topbar-bg: #07213a;
   --topbar-color: #ffffff;
   --paper: #ffffff;
-  --line: rgba(0,0,0,0.06);
-  --topbar-height: 48px; /* default */
-  --nav-height: 64px;
-  --header-font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
+  --gold: #c79a2a;
+
+  --topbar-height: 42px;
+  --nav-height: 58px;
+
+  --header-font: 'Poppins',
+    system-ui,
+    -apple-system,
+    'Segoe UI',
+    Roboto,
+    Arial,
+    sans-serif;
 }
 
-/* apply a clean font across header/topbar (add Google Fonts link in index.html if you want Poppins) */
-.topbar, .site-header, .nav, .topbar * , .nav *{
+/* =========================================================
+   GLOBAL HEADER FONT
+   ========================================================= */
+
+.topbar,
+.topbar *,
+.site-header,
+.site-header *,
+.nav,
+.nav * {
   font-family: var(--header-font);
+  box-sizing: border-box;
 }
 
-/* make sure fixed elements don't get cut on notched phones */
-.topbar{
-  background: var(--topbar-bg);
-  color: var(--topbar-color);
-  padding: 8px 16px;
-  padding-top: calc(8px + env(safe-area-inset-top));
-  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
+/* =========================================================
+   TOPBAR
+   ========================================================= */
+
+.topbar {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
-  z-index: 2400; /* keep topbar above everything */
-  font-size: 14px; /* increased slightly for readability */
+
   height: var(--topbar-height);
+
+  background: var(--topbar-bg);
+  color: var(--topbar-color);
+
+  padding: 0 12px;
+
   display: flex;
   align-items: center;
-  transform: translateY(0);
-  transition: transform 220ms ease, opacity 220ms ease;
+
+  z-index: 2400;
+
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+
+  overflow: hidden;
+
+  transition:
+    transform 220ms ease,
+    opacity 220ms ease;
 }
 
-.topbar.hidden{
-  transform: translateY(-100%);
+/* Safe area for phones */
+
+@supports (padding-top: env(safe-area-inset-top)) {
+  .topbar {
+    padding-top: env(safe-area-inset-top);
+    height: calc(var(--topbar-height) + env(safe-area-inset-top));
+  }
+}
+
+/* Hide on scroll */
+
+.topbar.hidden {
+  transform: translateY(-110%);
   opacity: 0;
 }
 
-.topbar.visible{
+.topbar.visible {
   transform: translateY(0);
   opacity: 1;
 }
 
-/* keep content from being overlapped by the fixed header/topbar */
-body{
-  padding-top: calc(var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top));
-}
+/* =========================================================
+   TOPBAR WRAPPER
+   ========================================================= */
 
-/* when topbar is hidden (scroll down), reduce body padding so hero moves up */
-body.topbar-hidden{
-  padding-top: calc(var(--nav-height) + env(safe-area-inset-top));
-}
-
-.topbar .topbar-wrap{
+.topbar .topbar-wrap {
   width: 100%;
   max-width: 1200px;
   margin: 0 auto;
+
   display: flex;
-  justify-content: space-between;
   align-items: center;
-  gap: 12px;
+  justify-content: center;
+
+  gap: 10px;
+
+  min-width: 0;
+
+  white-space: nowrap;
+  overflow: hidden;
 }
+
+/* =========================================================
+   TOPBAR LEFT / RIGHT
+   ========================================================= */
 
 .topbar-left,
-.topbar-right{
+.topbar-right,
+.topbar .contacts {
   display: flex;
   align-items: center;
-  gap: 10px;
+
+  gap: 8px;
+
   min-width: 0;
-}
 
-.topbar .contacts{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  min-width:0;
-}
-
-/* keep email visible: do not ellipsis the email; allow it to shrink and wrap if needed */
-.topbar .location,
-.topbar .hours{
-  overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
 }
-.topbar .email{
-  white-space: normal; /* allow wrapping */
-  word-break: break-word;
-  font-weight: 600;
-  font-size: 13px;
+
+/* =========================================================
+   TOPBAR TEXT
+   ========================================================= */
+
+.topbar {
+  font-size: 12px;
+  font-weight: 500;
+  line-height: 1;
 }
 
-.topbar .divider{ color: rgba(255,255,255,0.6); margin:0 8px; }
-.topbar a{ color: var(--topbar-color); text-decoration: none; opacity: 0.95; }
+.topbar a {
+  color: #ffffff;
+  text-decoration: none;
 
-/* Site header / nav fixed under topbar */
-.site-header{
+  white-space: nowrap;
+
+  font-size: 12px;
+  font-weight: 500;
+
+  opacity: 0.96;
+}
+
+.topbar .location,
+.topbar .hours,
+.topbar .phone,
+.topbar .email {
+  white-space: nowrap;
+
+  overflow: hidden;
+  text-overflow: ellipsis;
+
+  display: inline-block;
+
+  max-width: none;
+}
+
+/* Email should NEVER wrap */
+
+.topbar .email {
+  font-size: 12px;
+  font-weight: 500;
+
+  white-space: nowrap !important;
+
+  word-break: normal !important;
+  overflow-wrap: normal !important;
+}
+
+/* =========================================================
+   DIVIDERS
+   ========================================================= */
+
+.topbar .divider {
+  flex: 0 0 auto;
+
+  color: rgba(255, 255, 255, 0.45);
+
+  margin: 0 2px;
+
+  font-size: 12px;
+}
+
+/* =========================================================
+   BODY SPACE
+   ========================================================= */
+
+body {
+  padding-top:
+    calc(
+      var(--topbar-height) +
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    );
+}
+
+body.topbar-hidden {
+  padding-top:
+    calc(
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    );
+}
+
+/* =========================================================
+   MAIN HEADER
+   ========================================================= */
+
+.site-header {
   position: fixed;
-  top: calc(var(--topbar-height) + env(safe-area-inset-top));
+
+  top:
+    calc(
+      var(--topbar-height) +
+      env(safe-area-inset-top)
+    );
+
   left: 0;
   right: 0;
-  z-index: 2200; /* make sure header is above overlay */
-  background: rgba(255,255,255,0.98);
+
   height: var(--nav-height);
+
+  background: rgba(255, 255, 255, 0.98);
+
+  z-index: 2200;
+
   display: flex;
   align-items: center;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
+
+  box-shadow:
+    0 2px 10px rgba(0, 0, 0, 0.08);
+
   transition: top 220ms ease;
 }
 
-/* when topbar hidden we move the nav up to occupy same space */
-body.topbar-hidden .site-header{
+/* Move header up when topbar hides */
+
+body.topbar-hidden .site-header {
   top: env(safe-area-inset-top);
 }
 
-.nav.wrap{
+/* =========================================================
+   NAVIGATION CONTAINER
+   ========================================================= */
+
+.nav.wrap {
   width: 100%;
   max-width: 1200px;
+
   margin: 0 auto;
+
+  padding: 0 16px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
+
   gap: 12px;
+
+  height: 100%;
 }
 
-/* hamburger always on top */
-.hamburger{
-  background: transparent;
-  border: none;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px;
-  cursor: pointer;
-  z-index: 2250;
+/* =========================================================
+   LOGO
+   ========================================================= */
+
+.nav .brand {
+  display: flex;
+  align-items: center;
+
+  min-width: 0;
+
+  flex-shrink: 1;
 }
 
-/* Logo sizing: ensure the new logo is large and visible */
-.nav .brand, .nav .brand .brand-logo{
-  position: relative;
-  z-index: 2300; /* keep brand above overlays */
-}
-.nav .brand .brand-logo{
-  height: 72px; /* larger desktop logo */
+.nav .brand .brand-logo {
+  height: 48px;
   width: auto;
+
+  max-width: 175px;
+
   display: block;
+
   object-fit: contain;
 }
 
-/* ensure logo doesn't push layout on small screens */
-@media (max-width: 900px){
-  .nav .brand .brand-logo{ height: 48px; }
-  :root{ --topbar-height: 48px; --nav-height: 56px; }
-  .topbar{ font-size: 13px; }
-}
+/* =========================================================
+   APPLY NOW BUTTON
+   ========================================================= */
 
-@media (max-width: 420px){
-  .nav .brand .brand-logo{ height: 42px; }
-  :root{ --topbar-height: 44px; --nav-height: 52px; }
-  .topbar .contacts .phone:nth-child(n+3){ display:none; }
-  .topbar .divider{ display: none; }
-}
-
-/* active mobile nav menu should account for fixed header heights */
-#navlinks[style] {
-  top: calc(var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top));
-}
-
-/* CTA group on desktop */
-.nav-cta{
+.nav-cta {
   display: flex;
-  gap: 10px;
   align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  flex-shrink: 0;
 }
 
-.btn.btn-gold{
-  background: #c79a2a;
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 6px;
+.btn.btn-gold {
+  background: var(--gold);
+  color: #ffffff;
+
+  border: none;
+
+  padding: 10px 22px;
+
+  min-height: 40px;
+
+  border-radius: 7px;
+
   text-decoration: none;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+
+  white-space: nowrap;
+
+  font-family: var(--header-font);
+
+  font-size: 14px;
+  font-weight: 600;
+
+  box-shadow:
+    0 3px 8px rgba(199, 154, 42, 0.25);
+
+  transition:
+    transform 0.2s ease,
+    box-shadow 0.2s ease,
+    background 0.2s ease;
 }
 
-.btn.btn-outline{
+.btn.btn-gold:hover {
+  background: #b8891d;
+
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 5px 12px rgba(199, 154, 42, 0.3);
+}
+
+/* =========================================================
+   HAMBURGER
+   ========================================================= */
+
+.hamburger {
+  width: 44px;
+  height: 44px;
+
+  padding: 9px;
+
+  margin: 0;
+
   background: transparent;
-  border: 1px solid rgba(0,0,0,0.08);
-  color: #111;
-  padding: 8px 12px;
-  border-radius: 6px;
-  text-decoration: none;
+
+  border: none;
+
+  display: inline-flex;
+  flex-direction: column;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 5px;
+
+  cursor: pointer;
+
+  flex-shrink: 0;
+
+  z-index: 2250;
 }
 
-/* Overlay that appears when mobile menu is open */
-.nav-overlay {
-  position: fixed;
-  top: calc(var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top));
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.32);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 160ms ease-in-out;
-  z-index: 2140; /* below header */
+.hamburger span,
+.hamburger::before,
+.hamburger::after {
+  width: 27px;
+  height: 3px;
+
+  background: #07213a;
+
+  border-radius: 3px;
+
+  display: block;
 }
 
-.nav-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
+/* =========================================================
+   MOBILE NAV MENU
+   ========================================================= */
+
+#navlinks[style] {
+  top:
+    calc(
+      var(--topbar-height) +
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    ) !important;
 }
 
-/* ensure navlinks (mobile menu) has high z-index and full width */
-.navlinks{
-  z-index: 2150;
+.navlinks {
+  z-index: 2250;
 }
 
 .navlinks a {
   display: block;
-  padding: 8px 0;
+
   width: 100%;
-  color: #111;
+
+  padding: 11px 16px;
+
+  color: #111111;
+
   text-decoration: none;
+
+  font-size: 14px;
   font-weight: 600;
+
+  border-radius: 6px;
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
+}
+
+.navlinks a:hover {
+  background: #f5f1e7;
+  color: #b8891d;
+}
+
+/* =========================================================
+   MOBILE OVERLAY
+   ========================================================= */
+
+.nav-overlay {
+  position: fixed;
+
+  top:
+    calc(
+      var(--topbar-height) +
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    );
+
+  left: 0;
+  right: 0;
+  bottom: 0;
+
+  background: rgba(0, 0, 0, 0.35);
+
+  opacity: 0;
+
+  pointer-events: none;
+
+  transition: opacity 160ms ease;
+
+  z-index: 2140;
+}
+
+.nav-overlay.open {
+  opacity: 1;
+
+  pointer-events: auto;
 }
 
 
-i want too visible the all matter on top tab
+/* =========================================================
+   TABLET
+   ========================================================= */
+
+@media (max-width: 900px) {
+
+  :root {
+    --topbar-height: 40px;
+    --nav-height: 56px;
+  }
+
+  .topbar {
+    font-size: 11px;
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  .topbar a,
+  .topbar .email,
+  .topbar .phone,
+  .topbar .location,
+  .topbar .hours {
+    font-size: 11px;
+  }
+
+  .topbar .topbar-wrap {
+    gap: 6px;
+  }
+
+  .topbar .contacts {
+    gap: 5px;
+  }
+
+  .topbar .divider {
+    margin: 0 1px;
+  }
+
+  .nav.wrap {
+    padding: 0 12px;
+  }
+
+  .nav .brand .brand-logo {
+    height: 44px;
+    max-width: 155px;
+  }
+
+  .btn.btn-gold {
+    padding: 9px 18px;
+
+    min-height: 38px;
+
+    font-size: 13px;
+  }
+
+  .hamburger {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+
+/* =========================================================
+   MOBILE
+   ========================================================= */
+
+@media (max-width: 600px) {
+
+  :root {
+    --topbar-height: 38px;
+    --nav-height: 55px;
+  }
+
+  /* Compact topbar */
+
+  .topbar {
+    padding: 0 6px;
+
+    font-size: 10px;
+  }
+
+  .topbar .topbar-wrap {
+    justify-content: flex-start;
+
+    gap: 5px;
+
+    overflow: hidden;
+  }
+
+  .topbar-left,
+  .topbar-right,
+  .topbar .contacts {
+    gap: 5px;
+
+    flex-shrink: 0;
+  }
+
+  .topbar a,
+  .topbar .email,
+  .topbar .phone,
+  .topbar .location,
+  .topbar .hours {
+    font-size: 10px;
+
+    line-height: 1;
+
+    white-space: nowrap !important;
+  }
+
+  .topbar .email {
+    max-width: 185px;
+
+    overflow: hidden;
+
+    text-overflow: ellipsis;
+  }
+
+  .topbar .divider {
+    display: inline-block;
+
+    margin: 0 1px;
+
+    font-size: 10px;
+  }
+
+  /* Header */
+
+  .nav.wrap {
+    padding: 0 10px;
+
+    gap: 8px;
+  }
+
+  .nav .brand .brand-logo {
+    height: 43px;
+
+    max-width: 145px;
+  }
+
+  /* Apply button */
+
+  .btn.btn-gold {
+    padding: 8px 15px;
+
+    min-height: 38px;
+
+    border-radius: 6px;
+
+    font-size: 13px;
+  }
+
+  /* Hamburger */
+
+  .hamburger {
+    width: 40px;
+    height: 40px;
+
+    padding: 7px;
+  }
+
+  .hamburger span,
+  .hamburger::before,
+  .hamburger::after {
+    width: 25px;
+    height: 3px;
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px) {
+
+  :root {
+    --topbar-height: 36px;
+    --nav-height: 53px;
+  }
+
+  .topbar {
+    padding: 0 5px;
+  }
+
+  .topbar .topbar-wrap {
+    gap: 4px;
+  }
+
+  .topbar a,
+  .topbar .email,
+  .topbar .phone {
+    font-size: 9px;
+  }
+
+  .topbar .email {
+    max-width: 150px;
+  }
+
+  .topbar .divider {
+    margin: 0;
+    font-size: 9px;
+  }
+
+  .nav.wrap {
+    padding: 0 8px;
+  }
+
+  .nav .brand .brand-logo {
+    height: 40px;
+
+    max-width: 132px;
+  }
+
+  .btn.btn-gold {
+    padding: 7px 12px;
+
+    min-height: 36px;
+
+    font-size: 12px;
+  }
+
+  .hamburger {
+    width: 38px;
+    height: 38px;
+  }
+
+  .hamburger span,
+  .hamburger::before,
+  .hamburger::after {
+    width: 23px;
+    height: 3px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 360px) {
+
+  .topbar .email {
+    max-width: 125px;
+  }
+
+  .topbar a,
+  .topbar .email,
+  .topbar .phone {
+    font-size: 8.5px;
+  }
+
+  .nav .brand .brand-logo {
+    height: 37px;
+
+    max-width: 120px;
+  }
+
+  .btn.btn-gold {
+    padding: 6px 10px;
+
+    font-size: 11px;
+  }
+
+  .hamburger {
+    width: 36px;
+  }
+}
