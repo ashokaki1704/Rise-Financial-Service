@@ -406,6 +406,12 @@ body.topbar-hidden .site-header {
 
 .navlinks {
   z-index: 2250;
+  background: #ffffff !important;
+  margin: 0 !important;
+  padding: 0 !important;
+  border-top: 0 !important;
+  box-shadow: 0 6px 14px rgba(0, 0, 0, 0.12);
+  overflow: hidden;
 }
 
 .navlinks a {
@@ -415,7 +421,7 @@ body.topbar-hidden .site-header {
 
   padding: 11px 16px;
 
-  color: #111111;
+  color: #07213a !important;
 
   text-decoration: none;
 
@@ -734,5 +740,58 @@ body.topbar-hidden .site-header {
 
   .hamburger {
     width: 36px;
+  }
+}
+
+/* =========================================================
+   FINAL MOBILE MENU FIX — NO GAP + LIGHT BACKGROUND
+   ========================================================= */
+
+@media (max-width: 900px) {
+  .navlinks {
+    top: calc(
+      var(--topbar-height) +
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    ) !important;
+
+    margin-top: 0 !important;
+    padding-top: 0 !important;
+    background: #ffffff !important;
+    border-radius: 0 !important;
+  }
+
+  body.topbar-hidden .navlinks {
+    top: calc(
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    ) !important;
+  }
+
+  .navlinks a {
+    background: #ffffff !important;
+    color: #07213a !important;
+    margin: 0 !important;
+    border-radius: 0 !important;
+  }
+
+  .navlinks a:hover {
+    background: #f5f1e7 !important;
+    color: #b8891d !important;
+  }
+
+  .nav-overlay {
+    top: calc(
+      var(--topbar-height) +
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    ) !important;
+  }
+
+  body.topbar-hidden .nav-overlay {
+    top: calc(
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    ) !important;
   }
 }
