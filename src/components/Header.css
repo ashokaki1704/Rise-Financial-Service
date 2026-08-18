@@ -1,231 +1,286 @@
-/* Header + Topbar responsive styles with safe-area and ellipsis handling
-   Option B revised: show topbar on mobile, but hide it on scroll down and show on scroll up.
-   Topbar is kept out of the mobile menu and moves with scrolling for better visibility.
-   Added logo sizing and improved font settings so the new logo is larger and email is visible.
+/* =========================================================
+   MOBILE TOPBAR - SHOW ALL INFORMATION
+   ========================================================= */
+
+@media (max-width: 900px){
+
+  :root{
+    --topbar-height: 92px;
+    --nav-height: 56px;
+  }
+
+  .topbar{
+    height: auto;
+    min-height: var(--topbar-height);
+    padding: 7px 12px;
+    padding-top: calc(7px + env(safe-area-inset-top));
+    padding-bottom: 7px;
+    display: block;
+    overflow: visible;
+  }
+
+  .topbar .topbar-wrap{
+    width: 100%;
+    max-width: none;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: center;
+    gap: 5px;
+  }
+
+  /* First row - Location + Working hours */
+  .topbar-left{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    min-width: 0;
+  }
+
+  .topbar .location,
+  .topbar .hours{
+    font-size: 12px;
+    line-height: 18px;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+  }
+
+  .topbar .divider{
+    margin: 0 4px;
+    color: rgba(255,255,255,0.65);
+  }
+
+  /* Second row - Contact information */
+  .topbar-right{
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 0;
+  }
+
+  .topbar .contacts{
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 3px 8px;
+    align-items: center;
+    justify-items: center;
+  }
+
+  .topbar .phone{
+    font-size: 11px;
+    line-height: 17px;
+    white-space: nowrap;
+  }
+
+  /* Email gets its own full-width row */
+  .topbar .email{
+    grid-column: 1 / -1;
+    width: 100%;
+    text-align: center;
+    font-size: 11px;
+    line-height: 17px;
+    white-space: nowrap;
+    overflow: visible;
+    text-overflow: clip;
+    word-break: normal;
+  }
+
+  /* Do NOT hide phone numbers */
+  .topbar .contacts .phone:nth-child(n+3){
+    display: inline;
+  }
+
+  /* Do not hide divider */
+  .topbar .divider{
+    display: inline;
+  }
+
+  /* Header moves below the complete topbar */
+  .site-header{
+    top: var(--topbar-height);
+    height: var(--nav-height);
+    transition: top 220ms ease;
+  }
+
+  /* Body starts below topbar + navigation */
+  body{
+    padding-top: calc(
+      var(--topbar-height) +
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    );
+  }
+
+  /* Logo */
+  .nav .brand .brand-logo{
+    height: 44px;
+    width: auto;
+    max-width: 170px;
+    object-fit: contain;
+  }
+
+  /* Mobile navigation */
+  .nav.wrap{
+    padding: 0 10px;
+  }
+
+  .hamburger{
+    padding: 8px;
+  }
+
+  /* Apply Now button */
+  .nav-cta{
+    display: flex;
+    align-items: center;
+  }
+
+  .nav-cta .btn{
+    font-size: 13px;
+    padding: 9px 15px;
+    white-space: nowrap;
+  }
+
+  /* Mobile menu starts below BOTH topbar + header */
+  #navlinks[style]{
+    top: calc(
+      var(--topbar-height) +
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    );
+  }
+
+  .nav-overlay{
+    top: calc(
+      var(--topbar-height) +
+      var(--nav-height) +
+      env(safe-area-inset-top)
+    );
+  }
+}
+
+
+/* =========================================================
+   SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 420px){
+
+  :root{
+    --topbar-height: 96px;
+    --nav-height: 52px;
+  }
+
+  .topbar{
+    min-height: var(--topbar-height);
+    padding-left: 8px;
+    padding-right: 8px;
+  }
+
+  /* Location and timing */
+  .topbar-left{
+    gap: 5px;
+  }
+
+  .topbar .location,
+  .topbar .hours{
+    font-size: 11px;
+  }
+
+  .topbar .divider{
+    margin: 0 2px;
+  }
+
+  /* Contact numbers */
+  .topbar .phone{
+    font-size: 10.5px;
+  }
+
+  .topbar .email{
+    font-size: 10.5px;
+  }
+
+  /* Logo */
+  .nav .brand .brand-logo{
+    height: 40px;
+    max-width: 145px;
+  }
+
+  .nav-cta .btn.btn-gold{
+    padding: 8px 12px;
+    font-size: 12px;
+  }
+}
+
+
+/* =========================================================
+   VERY SMALL PHONES
+   ========================================================= */
+
+@media (max-width: 360px){
+
+  :root{
+    --topbar-height: 100px;
+    --nav-height: 52px;
+  }
+
+  .topbar .location,
+  .topbar .hours{
+    font-size: 10px;
+  }
+
+  .topbar .phone,
+  .topbar .email{
+    font-size: 10px;
+  }
+
+  .nav .brand .brand-logo{
+    height: 38px;
+    max-width: 130px;
+  }
+
+  .nav-cta .btn.btn-gold{
+    padding: 7px 10px;
+    font-size: 11px;
+  }
+}
+
+
+/* =========================================================
+   TOPBAR HIDE/SHOW ON SCROLL
+   ========================================================= */
+
+/*
+   When scrolling down, the complete topbar hides.
+   Navigation moves to the very top.
 */
-:root{
-  --topbar-bg: #07213a;
-  --topbar-color: #ffffff;
-  --paper: #ffffff;
-  --line: rgba(0,0,0,0.06);
-  --topbar-height: 48px; /* default */
-  --nav-height: 64px;
-  --header-font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial;
-}
 
-/* apply a clean font across header/topbar (add Google Fonts link in index.html if you want Poppins) */
-.topbar, .site-header, .nav, .topbar * , .nav *{
-  font-family: var(--header-font);
-}
-
-/* make sure fixed elements don't get cut on notched phones */
-.topbar{
-  background: var(--topbar-bg);
-  color: var(--topbar-color);
-  padding: 8px 16px;
-  padding-top: calc(8px + env(safe-area-inset-top));
-  box-shadow: 0 1px 6px rgba(0,0,0,0.12);
-  position: fixed;
-  top: 0;
-  left: 0;
-  right: 0;
-  z-index: 2400; /* keep topbar above everything */
-  font-size: 14px; /* increased slightly for readability */
-  height: var(--topbar-height);
-  display: flex;
-  align-items: center;
-  transform: translateY(0);
-  transition: transform 220ms ease, opacity 220ms ease;
-}
-
-.topbar.hidden{
-  transform: translateY(-100%);
-  opacity: 0;
-}
-
-.topbar.visible{
-  transform: translateY(0);
-  opacity: 1;
-}
-
-/* keep content from being overlapped by the fixed header/topbar */
-body{
-  padding-top: calc(var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top));
-}
-
-/* when topbar is hidden (scroll down), reduce body padding so hero moves up */
 body.topbar-hidden{
-  padding-top: calc(var(--nav-height) + env(safe-area-inset-top));
+  padding-top: calc(
+    var(--nav-height) +
+    env(safe-area-inset-top)
+  );
 }
 
-.topbar .topbar-wrap{
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  gap: 12px;
-}
-
-.topbar-left,
-.topbar-right{
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  min-width: 0;
-}
-
-.topbar .contacts{
-  display:flex;
-  gap:8px;
-  align-items:center;
-  min-width:0;
-}
-
-/* keep email visible: do not ellipsis the email; allow it to shrink and wrap if needed */
-.topbar .location,
-.topbar .hours{
-  overflow: hidden;
-  text-overflow: ellipsis;
-  white-space: nowrap;
-}
-.topbar .email{
-  white-space: normal; /* allow wrapping */
-  word-break: break-word;
-  font-weight: 600;
-  font-size: 13px;
-}
-
-.topbar .divider{ color: rgba(255,255,255,0.6); margin:0 8px; }
-.topbar a{ color: var(--topbar-color); text-decoration: none; opacity: 0.95; }
-
-/* Site header / nav fixed under topbar */
-.site-header{
-  position: fixed;
-  top: calc(var(--topbar-height) + env(safe-area-inset-top));
-  left: 0;
-  right: 0;
-  z-index: 2200; /* make sure header is above overlay */
-  background: rgba(255,255,255,0.98);
-  height: var(--nav-height);
-  display: flex;
-  align-items: center;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.06);
-  transition: top 220ms ease;
-}
-
-/* when topbar hidden we move the nav up to occupy same space */
 body.topbar-hidden .site-header{
   top: env(safe-area-inset-top);
 }
 
-.nav.wrap{
-  width: 100%;
-  max-width: 1200px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  gap: 12px;
+body.topbar-hidden .nav-overlay{
+  top: calc(
+    var(--nav-height) +
+    env(safe-area-inset-top)
+  );
 }
 
-/* hamburger always on top */
-.hamburger{
-  background: transparent;
-  border: none;
-  display: inline-flex;
-  flex-direction: column;
-  gap: 4px;
-  padding: 8px;
-  cursor: pointer;
-  z-index: 2250;
-}
-
-/* Logo sizing: ensure the new logo is large and visible */
-.nav .brand, .nav .brand .brand-logo{
-  position: relative;
-  z-index: 2300; /* keep brand above overlays */
-}
-.nav .brand .brand-logo{
-  height: 72px; /* larger desktop logo */
-  width: auto;
-  display: block;
-  object-fit: contain;
-}
-
-/* ensure logo doesn't push layout on small screens */
-@media (max-width: 900px){
-  .nav .brand .brand-logo{ height: 48px; }
-  :root{ --topbar-height: 48px; --nav-height: 56px; }
-  .topbar{ font-size: 13px; }
-}
-
-@media (max-width: 420px){
-  .nav .brand .brand-logo{ height: 42px; }
-  :root{ --topbar-height: 44px; --nav-height: 52px; }
-  .topbar .contacts .phone:nth-child(n+3){ display:none; }
-  .topbar .divider{ display: none; }
-}
-
-/* active mobile nav menu should account for fixed header heights */
-#navlinks[style] {
-  top: calc(var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top));
-}
-
-/* CTA group on desktop */
-.nav-cta{
-  display: flex;
-  gap: 10px;
-  align-items: center;
-}
-
-.btn.btn-gold{
-  background: #c79a2a;
-  color: #fff;
-  padding: 8px 14px;
-  border-radius: 6px;
-  text-decoration: none;
-}
-
-.btn.btn-outline{
-  background: transparent;
-  border: 1px solid rgba(0,0,0,0.08);
-  color: #111;
-  padding: 8px 12px;
-  border-radius: 6px;
-  text-decoration: none;
-}
-
-/* Overlay that appears when mobile menu is open */
-.nav-overlay {
-  position: fixed;
-  top: calc(var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top));
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0,0,0,0.32);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 160ms ease-in-out;
-  z-index: 2140; /* below header */
-}
-
-.nav-overlay.open {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-/* ensure navlinks (mobile menu) has high z-index and full width */
-.navlinks{
-  z-index: 2150;
-}
-
-.navlinks a {
-  display: block;
-  padding: 8px 0;
-  width: 100%;
-  color: #111;
-  text-decoration: none;
-  font-weight: 600;
+body.topbar-hidden #navlinks[style]{
+  top: calc(
+    var(--nav-height) +
+    env(safe-area-inset-top)
+  );
 }
