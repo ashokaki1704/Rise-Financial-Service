@@ -73,7 +73,7 @@ export default function Header() {
           <div className="topbar-left">
             <div className="location">Vijayawada, Andhra Pradesh</div>
             <span className="divider">|</span>
-            <div className="hours">Mon–Sat, 10 AM – 7 PM</div>
+           
           </div>
 
           <div className="topbar-right">
