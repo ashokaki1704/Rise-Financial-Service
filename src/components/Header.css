@@ -795,3 +795,347 @@ body.topbar-hidden .site-header {
     ) !important;
   }
 }
+
+/* =========================================================
+   RISE FINANCIAL SERVICES — FONT + MOBILE HEADER POLISH
+   ========================================================= */
+
+/* Import an elegant, highly readable web font */
+@import url('https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Poppins:wght@500;600;700;800&display=swap');
+
+:root {
+  --header-font: 'Poppins', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+  --topbar-font: 'Manrope', system-ui, -apple-system, 'Segoe UI', Roboto, Arial, sans-serif;
+}
+
+/* Cleaner, more premium topbar typography */
+.topbar,
+.topbar a,
+.topbar .email,
+.topbar .phone,
+.topbar .location,
+.topbar .hours,
+.topbar .divider {
+  font-family: var(--topbar-font) !important;
+}
+
+.topbar {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.15px;
+}
+
+.topbar .topbar-wrap {
+  gap: 9px;
+}
+
+.topbar .contacts,
+.topbar-left,
+.topbar-right {
+  gap: 7px;
+}
+
+.topbar a,
+.topbar .email,
+.topbar .phone {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.1px;
+}
+
+.topbar .email {
+  color: #ead09b;
+  font-weight: 700;
+}
+
+.topbar .phone {
+  color: #ffffff;
+}
+
+.topbar .divider {
+  color: rgba(255,255,255,.55);
+  font-weight: 500;
+}
+
+/* Laptop / desktop navigation */
+.nav .navlinks a,
+.navlinks a {
+  font-family: var(--header-font) !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  letter-spacing: 0.05px;
+}
+
+.btn.btn-gold {
+  font-family: var(--header-font) !important;
+  font-size: 14px !important;
+  font-weight: 700 !important;
+  letter-spacing: 0.15px;
+}
+
+/* Better mobile header alignment */
+@media (max-width: 900px) {
+  .site-header {
+    height: var(--nav-height);
+  }
+
+  .nav.wrap {
+    width: 100%;
+    padding: 0 12px !important;
+    gap: 10px !important;
+  }
+
+  .nav .brand {
+    flex: 1 1 auto;
+    min-width: 0;
+    overflow: hidden;
+  }
+
+  .nav .brand .brand-logo {
+    height: 43px !important;
+    width: auto;
+    max-width: 145px !important;
+  }
+
+  .nav-cta {
+    flex: 0 0 auto;
+    margin-left: auto;
+  }
+
+  .btn.btn-gold {
+    min-height: 40px !important;
+    padding: 8px 17px !important;
+    border-radius: 8px !important;
+    font-size: 13px !important;
+  }
+
+  .hamburger {
+    flex: 0 0 42px;
+    width: 42px !important;
+    height: 42px !important;
+    padding: 6px !important;
+    margin-left: 0 !important;
+  }
+
+  .hamburger span,
+  .hamburger::before,
+  .hamburger::after {
+    width: 25px !important;
+    height: 3px !important;
+  }
+
+  /* Mobile menu: compact, readable, and directly attached to header */
+  .navlinks {
+    margin: 0 !important;
+    padding: 0 !important;
+    border: 0 !important;
+    border-radius: 0 !important;
+    box-shadow: 0 8px 20px rgba(0,0,0,.14) !important;
+  }
+
+  .navlinks a {
+    display: flex !important;
+    align-items: center !important;
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 0 20px !important;
+    font-family: var(--header-font) !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    line-height: 1.1 !important;
+    letter-spacing: .1px !important;
+    border-bottom: 1px solid rgba(7,33,58,.07) !important;
+  }
+
+  .navlinks a:last-child {
+    border-bottom: 0 !important;
+  }
+}
+
+/* Normal phones */
+@media (max-width: 600px) {
+  :root {
+    --topbar-height: 38px;
+    --nav-height: 55px;
+  }
+
+  .topbar {
+    padding: 0 7px !important;
+  }
+
+  .topbar .topbar-wrap {
+    width: 100%;
+    justify-content: center !important;
+    gap: 5px !important;
+  }
+
+  .topbar .contacts,
+  .topbar-left,
+  .topbar-right {
+    gap: 4px !important;
+  }
+
+  .topbar a,
+  .topbar .email,
+  .topbar .phone {
+    font-size: 10px !important;
+    line-height: 1 !important;
+    font-weight: 600 !important;
+  }
+
+  .topbar .email {
+    max-width: 165px !important;
+    font-weight: 700 !important;
+  }
+
+  .topbar .divider {
+    font-size: 10px !important;
+    margin: 0 !important;
+  }
+
+  .nav.wrap {
+    padding: 0 9px !important;
+    gap: 8px !important;
+  }
+
+  .nav .brand .brand-logo {
+    height: 43px !important;
+    max-width: 142px !important;
+  }
+
+  .btn.btn-gold {
+    min-height: 39px !important;
+    padding: 8px 15px !important;
+    font-size: 13px !important;
+  }
+
+  .hamburger {
+    flex-basis: 40px;
+    width: 40px !important;
+    height: 40px !important;
+  }
+
+  .hamburger span,
+  .hamburger::before,
+  .hamburger::after {
+    width: 25px !important;
+  }
+
+  .navlinks a {
+    min-height: 50px !important;
+    height: 50px !important;
+    padding: 0 18px !important;
+    font-size: 15px !important;
+  }
+}
+
+/* Small phones: keep every topbar item visible without ugly clipping */
+@media (max-width: 420px) {
+  :root {
+    --topbar-height: 36px;
+    --nav-height: 53px;
+  }
+
+  .topbar {
+    padding: 0 4px !important;
+  }
+
+  .topbar .topbar-wrap {
+    justify-content: center !important;
+    gap: 3px !important;
+  }
+
+  .topbar .contacts,
+  .topbar-left,
+  .topbar-right {
+    gap: 3px !important;
+  }
+
+  .topbar a,
+  .topbar .email,
+  .topbar .phone {
+    font-size: 8.5px !important;
+    letter-spacing: 0 !important;
+  }
+
+  .topbar .email {
+    max-width: 112px !important;
+  }
+
+  .topbar .divider {
+    font-size: 8.5px !important;
+  }
+
+  .nav.wrap {
+    padding: 0 7px !important;
+    gap: 6px !important;
+  }
+
+  .nav .brand .brand-logo {
+    height: 40px !important;
+    max-width: 128px !important;
+  }
+
+  .btn.btn-gold {
+    min-height: 37px !important;
+    padding: 7px 12px !important;
+    border-radius: 7px !important;
+    font-size: 12px !important;
+  }
+
+  .hamburger {
+    flex-basis: 38px;
+    width: 38px !important;
+    height: 38px !important;
+  }
+
+  .hamburger span,
+  .hamburger::before,
+  .hamburger::after {
+    width: 23px !important;
+    height: 3px !important;
+  }
+
+  .navlinks a {
+    min-height: 48px !important;
+    height: 48px !important;
+    padding: 0 16px !important;
+    font-size: 14px !important;
+  }
+}
+
+/* Very small phones */
+@media (max-width: 360px) {
+  .topbar a,
+  .topbar .email,
+  .topbar .phone {
+    font-size: 8px !important;
+  }
+
+  .topbar .email {
+    max-width: 105px !important;
+  }
+
+  .nav .brand .brand-logo {
+    height: 38px !important;
+    max-width: 118px !important;
+  }
+
+  .btn.btn-gold {
+    min-height: 36px !important;
+    padding: 6px 10px !important;
+    font-size: 11px !important;
+  }
+
+  .hamburger {
+    flex-basis: 36px;
+    width: 36px !important;
+    height: 36px !important;
+  }
+
+  .navlinks a {
+    min-height: 46px !important;
+    height: 46px !important;
+    font-size: 14px !important;
+  }
+}
