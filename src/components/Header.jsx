@@ -68,7 +68,12 @@ export default function Header() {
 
   return (
     <>
-     
+      <div className={`topbar ${showTopbar ? 'visible' : 'hidden'}`}>
+        <div className="wrap topbar-wrap">
+          <div className="topbar-left">
+            <div className="location">Vijayawada, Andhra Pradesh</div>
+            <span className="divider">|</span>
+           
           </div>
 
           <div className="topbar">
