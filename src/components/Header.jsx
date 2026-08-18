@@ -11,46 +11,45 @@ export default function Header() {
   // Lock page scroll when mobile menu is open
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
-    // when menu opens, ensure topbar is visible
+
     if (open) {
       setShowTopbar(true);
       document.body.classList.remove('topbar-hidden');
     }
+
     return () => {
       document.body.style.overflow = '';
     };
   }, [open]);
 
-  // show/hide topbar on scroll: hide when scrolling down, show when scrolling up
+  // Hide topbar while scrolling down, show while scrolling up
   useEffect(() => {
     const onScroll = () => {
       const currentY = window.scrollY || window.pageYOffset;
+
       if (currentY > lastY.current && currentY > 80) {
-        // scrolling down
-        if (showTopbar) {
-          setShowTopbar(false);
-          document.body.classList.add('topbar-hidden');
-        }
+        setShowTopbar(false);
+        document.body.classList.add('topbar-hidden');
       } else {
-        // scrolling up
-        if (!showTopbar) {
-          setShowTopbar(true);
-          document.body.classList.remove('topbar-hidden');
-        }
+        setShowTopbar(true);
+        document.body.classList.remove('topbar-hidden');
       }
+
       lastY.current = currentY;
     };
 
     window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [showTopbar]);
 
-  // style used when the mobile menu is open
+    return () => {
+      window.removeEventListener('scroll', onScroll);
+    };
+  }, []);
+
+  // Mobile menu
   const mobileMenuStyle = open
     ? {
         display: 'flex',
-        position: 'fixed', // ensure it sits above page content and below headers
+        position: 'fixed',
         top: 'calc(var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top))',
         left: 0,
         right: 0,
@@ -60,7 +59,8 @@ export default function Header() {
         padding: '18px 20px',
         borderBottom: '1px solid var(--line)',
         gap: '14px',
-        maxHeight: 'calc(100vh - (var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top)))',
+        maxHeight:
+          'calc(100vh - (var(--topbar-height) + var(--nav-height) + env(safe-area-inset-top)))',
         overflowY: 'auto',
         zIndex: 2050,
       }
@@ -68,28 +68,37 @@ export default function Header() {
 
   return (
     <>
+      {/* TOPBAR */}
       <div className={`topbar ${showTopbar ? 'visible' : 'hidden'}`}>
         <div className="wrap topbar-wrap">
-          <div className="topbar-left">
-            <div className="location">Vijayawada, Andhra Pradesh</div>
-            <span className="divider">|</span>
-           
-          </div>
+          <div className="contacts">
+            <a href="tel:+918688242655" className="phone">
+              +91 86882 42655
+            </a>
 
-          <div className="topbar">
-            <div className="contacts">
-              <a href="tel:+918688242655" className="phone">+91 86882 42655</a>
-              <span className="comma">,</span>
-              <a href="tel:+917382120015" className="phone">+91 73821 20015</a>
-              <span className="divider">|</span>
-              <a href="mailto:ashok.risefinance@gmail.com" className="email">ashok.risefinance@gmail.com</a>
-            </div>
+            <span className="separator">|</span>
+
+            <a href="tel:+917382120015" className="phone">
+              +91 73821 20015
+            </a>
+
+            <span className="separator">|</span>
+
+            <a
+              href="mailto:ashok.risefinance@gmail.com"
+              className="email"
+            >
+              ashok.risefinance@gmail.com
+            </a>
           </div>
         </div>
       </div>
 
+      {/* HEADER */}
       <header className="site-header">
         <nav className="nav wrap">
+
+          {/* LOGO */}
           <a className="brand" href="#home">
             <img
               className="brand-logo"
@@ -100,6 +109,7 @@ export default function Header() {
             />
           </a>
 
+          {/* NAV LINKS */}
           <div
             className="navlinks"
             id="navlinks"
@@ -113,11 +123,26 @@ export default function Header() {
             <a href="#contact" onClick={closeMenu}>Contact</a>
           </div>
 
+          {/* DESKTOP BUTTONS */}
           <div className="nav-cta">
-            <a className="btn btn-outline" href="tel:+918688242655" role="button">Call Us</a>
-            <a className="btn btn-gold" href="#apply" role="button">Apply Now</a>
+            <a
+              className="btn btn-outline"
+              href="tel:+918688242655"
+              role="button"
+            >
+              Call Us
+            </a>
+
+            <a
+              className="btn btn-gold"
+              href="#apply"
+              role="button"
+            >
+              Apply Now
+            </a>
           </div>
 
+          {/* MOBILE MENU */}
           <button
             className="hamburger"
             id="hamburger"
@@ -125,12 +150,15 @@ export default function Header() {
             aria-expanded={open}
             onClick={() => setOpen((v) => !v)}
           >
-            <span></span><span></span><span></span>
+            <span></span>
+            <span></span>
+            <span></span>
           </button>
+
         </nav>
       </header>
 
-      {/* overlay shown only when the mobile menu is open — closes menu when tapped */}
+      {/* MOBILE OVERLAY */}
       <div
         className={`nav-overlay ${open ? 'open' : ''}`}
         onClick={closeMenu}
